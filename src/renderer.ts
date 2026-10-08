@@ -34,6 +34,7 @@ const statusText = document.getElementById("status-text");
 const resetButton = document.getElementById(
   "reset-btn",
 ) as HTMLButtonElement;
+const actionBtns = document.getElementsByClassName("action-btns");
 
 const tagify = new Tagify(commandInput);
 
@@ -99,7 +100,7 @@ function setStatus(
 
   // Reset
   status.className =
-    "inline-flex w-fit items-center gap-2 rounded-full border px-3 py-1 text-sm font-medium";
+    "inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900 px-2 text-sm font-medium text-slate-400 shadow-sm";
 
   statusDot.className = "h-2 w-2 rounded-full";
 
@@ -159,3 +160,8 @@ resetButton?.addEventListener("click", () => {
   // Reset status
   setStatus("ready");
 });
+
+
+actionBtns?.addEventListener("click", () => {
+  alert("That is just prop.. dont expect it will work 🤨")
+})

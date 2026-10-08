@@ -1,4 +1,4 @@
-import { app, BrowserWindow, dialog } from "electron";
+import { app, BrowserWindow, dialog, screen } from "electron";
 import path from "node:path";
 import started from "electron-squirrel-startup";
 import { ipcMain } from "electron";
@@ -14,10 +14,11 @@ if (started) {
 }
 
 const createWindow = () => {
+  const mainDisplay = screen.getPrimaryDisplay().workAreaSize;
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 800,
+    width: mainDisplay.width,
+    height: mainDisplay.height,
     icon: path.join(__dirname, "../assets/icon.ico"),
     webPreferences: {
       preload: path.join(__dirname, "preload.cjs"),
@@ -27,7 +28,7 @@ const createWindow = () => {
   // and load the index.html of the app.
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
     mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
-    mainWindow.webContents.openDevTools();
+    // mainWindow.webContents.openDevTools();
   } else {
     mainWindow.loadFile(
       path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`),
